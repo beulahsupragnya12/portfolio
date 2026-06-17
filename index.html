@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beulah Supragnya — Software Engineer · AI & Backend Systems</title>
+<meta name="description" content="Software Engineer specializing in AI systems, backend engineering, and full-stack development. Currently pursuing MSc Computer Science at Maynooth University.">
+<meta property="og:title" content="Beulah Supragnya — Software Engineer">
+<meta property="og:description" content="Building intelligent systems and scalable software.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#09090f;--bg2:#0f0f1a;--bg3:#13131f;--bg4:#1a1a28;
+--border:#ffffff0f;--border2:#ffffff18;--border3:#ffffff28;
+--text:#f0f0f8;--text2:#a8a8c0;--text3:#686880;
+--accent:#7c6ef5;--accent2:#a78bfa;--accent3:#c4b5fd;
+--teal:#2dd4bf;--amber:#f59e0b;--green:#10b981;
+--red:#f43f5e;--blue:#3b82f6;
+--glow:rgba(124,110,245,0.15);--glow2:rgba(124,110,245,0.06);
+--r:12px;--r2:16px;--r3:24px;
+--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'DM Mono',monospace;
+--nav-h:64px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* SELECTION */
+::selection{background:rgba(124,110,245,0.3);color:#fff}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;padding:0 clamp(1.5rem,5vw,4rem);transition:background .3s,border-bottom .3s}
+nav.scrolled{background:rgba(9,9,15,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{color:var(--text3);font-size:.875rem;text-decoration:none;transition:color .2s;letter-spacing:.01em}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:rgba(124,110,245,0.12);border:1px solid rgba(124,110,245,0.3);color:var(--accent2)!important;padding:.4rem 1rem;border-radius:6px;transition:all .2s!important;font-size:.8rem!important}
+.nav-cta:hover{background:rgba(124,110,245,0.2)!important;border-color:var(--accent)!important;color:var(--accent3)!important}
+.nav-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
+.nav-toggle span{width:22px;height:1.5px;background:var(--text2);border-radius:2px;transition:.3s}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav-h) + 4rem) clamp(1.5rem,5vw,4rem) 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,110,245,.5),transparent 70%);top:-200px;right:-100px;animation:orbFloat 12s ease-in-out infinite}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(45,212,191,.3),transparent 70%);bottom:-100px;left:-50px;animation:orbFloat 15s ease-in-out infinite reverse}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(167,139,250,.2),transparent 70%);top:40%;left:30%;animation:orbFloat 18s ease-in-out infinite}
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,#000 30%,transparent 100%)}
+.hero-content{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1}
+.status-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);color:#6ee7b7;padding:.35rem .9rem;border-radius:100px;font-size:.78rem;font-family:var(--font-mono);letter-spacing:.03em;margin-bottom:2rem}
+.status-dot{width:7px;height:7px;background:#10b981;border-radius:50%;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{opacity:.8;box-shadow:0 0 0 5px transparent}}
+.hero-headline{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.5rem}
+.hero-headline .line1{display:block;color:var(--text)}
+.hero-headline .line2{display:block;background:linear-gradient(135deg,var(--accent2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);color:var(--text2);max-width:560px;margin-bottom:2.5rem;font-weight:300;line-height:1.7}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:3.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:8px;font-size:.875rem;font-weight:500;text-decoration:none;cursor:pointer;transition:all .2s;border:none;font-family:var(--font-body)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 30px rgba(124,110,245,.35)}
+.btn-ghost{background:transparent;border:1px solid var(--border3);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--border3);background:var(--bg3);color:var(--text);transform:translateY(-1px)}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{font-family:var(--font-mono);font-size:.72rem;color:var(--text3);padding:.25rem .7rem;background:var(--bg3);border:1px solid var(--border);border-radius:4px}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--text3);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;animation:bounce 2s ease-in-out infinite;z-index:1}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-arrow{width:14px;height:14px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);transform:rotate(45deg)}
+
+/* SECTION BASICS */
+section{padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,4rem)}
+.container{max-width:1200px;margin:0 auto;width:100%}
+.section-label{font-family:var(--font-mono);font-size:.72rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+.section-label::before{content:'';display:block;width:20px;height:1px;background:var(--accent)}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:1rem;line-height:1.1}
+.section-sub{color:var(--text2);font-size:1rem;max-width:500px;font-weight:300}
+
+/* DIVIDER */
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0}
+
+/* ABOUT */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:4rem}
+.about-text p{color:var(--text2);font-size:1rem;line-height:1.8;margin-bottom:1.2rem;font-weight:300}
+.about-text p strong{color:var(--text);font-weight:500}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;transition:border-color .2s}
+.stat-card:hover{border-color:var(--border2)}
+.stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--accent2);letter-spacing:-0.03em}
+.stat-label{font-size:.78rem;color:var(--text3);margin-top:.2rem}
+.about-right{display:flex;flex-direction:column;gap:1.5rem}
+.edu-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;position:relative;overflow:hidden;transition:border-color .2s}
+.edu-card:hover{border-color:var(--border2)}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--teal))}
+.edu-degree{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.edu-school{font-size:.875rem;color:var(--accent2);margin-bottom:.25rem}
+.edu-meta{font-size:.78rem;color:var(--text3);display:flex;gap:1rem}
+.now-card{background:linear-gradient(135deg,rgba(124,110,245,.08),rgba(45,212,191,.05));border:1px solid rgba(124,110,245,.2);border-radius:var(--r2);padding:1.5rem}
+.now-title{font-family:var(--font-mono);font-size:.72rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.now-item{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.75rem;color:var(--text2);font-size:.875rem}
+.now-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:.4rem;flex-shrink:0}
+
+/* PROJECTS */
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:4rem}
+.project-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:all .3s;position:relative;group:true}
+.project-card:hover{border-color:rgba(124,110,245,.3);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.project-card:first-child{grid-column:1/-1}
+.project-header{padding:2rem 2rem 1.5rem;position:relative}
+.project-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.2rem;font-weight:700;font-family:var(--font-display)}
+.project-name{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.5rem;letter-spacing:-0.02em}
+.project-desc{font-size:.875rem;color:var(--text2);line-height:1.6;font-weight:300}
+.project-stack{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 2rem;margin-bottom:1.5rem}
+.stack-pill{font-family:var(--font-mono);font-size:.7rem;color:var(--text3);padding:.2rem .6rem;background:var(--bg4);border:1px solid var(--border);border-radius:4px}
+.project-highlights{padding:0 2rem;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.5rem}
+.highlight{display:flex;align-items:flex-start;gap:.6rem;font-size:.8rem;color:var(--text3)}
+.highlight-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:.35rem;flex-shrink:0}
+.project-footer{padding:1.25rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.project-link{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--accent2);text-decoration:none;transition:color .2s}
+.project-link:hover{color:var(--accent3)}
+.project-badge{font-family:var(--font-mono);font-size:.65rem;padding:.2rem .6rem;border-radius:4px;background:rgba(124,110,245,.1);border:1px solid rgba(124,110,245,.2);color:var(--accent2)}
+.microsoft-badge{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:#93c5fd}
+.project-visual{width:100%;height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.project-visual-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.15;font-weight:900;font-family:var(--font-display);letter-spacing:-0.05em;user-select:none;color:var(--text)}
+
+/* FEATURED (WIDE) PROJECT */
+.project-card.featured{display:grid;grid-template-columns:1fr 1fr}
+.project-card.featured .project-content{display:flex;flex-direction:column}
+.project-card.featured .project-visual{height:100%;min-height:280px}
+.project-card.featured .project-header{flex:1}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:4rem}
+.skill-cat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;transition:border-color .2s}
+.skill-cat:hover{border-color:var(--border2)}
+.skill-cat-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+.skill-cat-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.875rem}
+.skill-cat-name{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-0.01em}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.skill-tag{font-family:var(--font-mono);font-size:.7rem;color:var(--text2);padding:.3rem .7rem;background:var(--bg4);border:1px solid var(--border);border-radius:5px;transition:all .15s}
+.skill-tag:hover{border-color:var(--border3);color:var(--text)}
+
+/* EXPERIENCE */
+#experience{background:var(--bg2)}
+.exp-timeline{margin-top:4rem;display:flex;flex-direction:column;gap:0}
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:3rem;padding:2.5rem 0;border-bottom:1px solid var(--border);position:relative}
+.exp-item:last-child{border-bottom:none}
+.exp-date{font-family:var(--font-mono);font-size:.78rem;color:var(--text3);padding-top:.35rem;letter-spacing:.03em}
+.exp-date-range{display:block;margin-bottom:.35rem}
+.exp-status{display:inline-flex;align-items:center;gap:.35rem;font-size:.68rem;color:#6ee7b7;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:.2rem .6rem;border-radius:100px}
+.exp-content-title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.2rem;letter-spacing:-0.01em}
+.exp-content-sub{font-size:.875rem;color:var(--accent2);margin-bottom:1rem}
+.exp-content-body{font-size:.875rem;color:var(--text2);line-height:1.7;font-weight:300}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+
+/* GITHUB
+#github{background:var(--bg)}
+.github-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:4rem}
+.gh-stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.75rem;text-align:center;transition:all .2s}
+.gh-stat:hover{border-color:var(--border2);transform:translateY(-2px)}
+.gh-num{font-family:var(--font-display);font-size:2rem;font-weight:800;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--accent2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gh-label{font-size:.78rem;color:var(--text3);margin-top:.3rem}
+.gh-repos{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.repo-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;transition:all .2s;text-decoration:none}
+.repo-card:hover{border-color:rgba(124,110,245,.3);transform:translateY(-2px)}
+.repo-name{font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.repo-desc{font-size:.78rem;color:var(--text3);line-height:1.5;margin-bottom:.75rem}
+.repo-meta{display:flex;gap:1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--text3)}
+.repo-lang::before{content:'●';margin-right:.3rem}
+.lang-python{color:#3572A5}
+.lang-ts{color:#2b7489}
+.lang-js{color:#f1e05a}
+.contribution-chart{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:1.75rem;margin-top:1rem}
+.contrib-label{font-size:.78rem;color:var(--text3);margin-bottom:1rem;font-family:var(--font-mono)}
+.contrib-grid{display:grid;grid-template-columns:repeat(52,1fr);gap:2px}
+.contrib-day{width:100%;aspect-ratio:1;border-radius:2px;background:var(--bg4)}
+.contrib-day.l1{background:rgba(124,110,245,.25)}
+.contrib-day.l2{background:rgba(124,110,245,.45)}
+.contrib-day.l3{background:rgba(124,110,245,.65)}
+.contrib-day.l4{background:rgba(124,110,245,.9)} */
+
+/* CONTACT */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:4rem}
+.contact-copy .big-cta{font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;color:var(--text);line-height:1.1;letter-spacing:-0.03em;margin-bottom:1rem}
+.contact-copy .big-cta span{background:linear-gradient(135deg,var(--accent2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.contact-copy p{color:var(--text2);font-size:.9rem;line-height:1.7;font-weight:300;margin-bottom:2rem}
+.contact-links{display:flex;flex-direction:column;gap:.75rem}
+.contact-link{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--text2);font-size:.875rem;padding:.75rem 1rem;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);transition:all .2s}
+.contact-link:hover{border-color:rgba(124,110,245,.3);color:var(--text);transform:translateX(3px)}
+.contact-link-icon{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.contact-form{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:2rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:.78rem;color:var(--text3);font-family:var(--font-mono);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem}
+.form-group input,.form-group textarea{width:100%;background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-family:var(--font-body);font-size:.875rem;transition:border-color .2s;outline:none;resize:none}
+.form-group input:focus,.form-group textarea:focus{border-color:rgba(124,110,245,.4)}
+.form-group textarea{height:120px;line-height:1.6}
+.form-submit{width:100%;padding:.75rem;background:var(--accent);border:none;border-radius:8px;color:#fff;font-family:var(--font-display);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.01em}
+.form-submit:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 30px rgba(124,110,245,.3)}
+
+/* FOOTER */
+footer{padding:2.5rem clamp(1.5rem,5vw,4rem);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
+.footer-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-family:var(--font-mono);font-size:.72rem;color:var(--text3)}
+.footer-copy a{color:var(--accent2);text-decoration:none}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:.78rem;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text2)}
+
+/* BENTO EXTRAS */
+.bento-large{grid-column:1/-1}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* NOISE OVERLAY */
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+
+/* MOUSE GLOW */
+.mouse-glow{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(124,110,245,.06),transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:left .15s ease,top .15s ease}
+
+/* MOBILE */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-template-columns:1fr}
+  .project-card.featured .project-visual{height:180px}
+  .github-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .gh-repos{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr;gap:.75rem}
+  .exp-date{padding-top:0}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(9,9,15,.97);padding:2rem;border-bottom:1px solid var(--border);gap:1.5rem}
+  .nav-toggle{display:flex}
+  .github-grid{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .contrib-grid{grid-template-columns:repeat(26,1fr)}
+}
+
+/* LINK ICON SVG */
+.icon-ext,.icon-gh,.icon-li,.icon-mail{display:inline-flex;align-items:center}
+svg.icon{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+
+<div class="mouse-glow" id="mouseGlow"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">bsp<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="grid-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="status-badge reveal">
+      <div class="status-dot"></div>
+      Available for roles &amp; internships · Dublin, Ireland
+    </div>
+    <h1 class="hero-headline">
+      <span class="line1 reveal reveal-delay-1">Building intelligent</span>
+      <span class="line2 reveal reveal-delay-2">systems that scale.</span>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      Software engineer focused on <strong>AI systems</strong>, <strong>backend architecture</strong>, and <strong>full-stack products</strong>.
+      I build end-to-end pipelines — from ML inference to REST APIs to responsive interfaces.
+    </p>
+    <div class="hero-btns reveal reveal-delay-3">
+      <a href="https://github.com/beulahsupragnya12" target="_blank" class="btn btn-ghost">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/beulahsupragnyapamula" target="_blank" class="btn btn-ghost">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:beulahsupragnya12@gmail.com" class="btn btn-ghost">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+      <a href="#projects" class="btn btn-primary">
+        View Projects
+        <svg class="icon" viewBox="0 0 24 24" style="width:13px;height:13px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="hero-tags reveal">
+      <span class="tag">FastAPI</span>
+      <span class="tag">Python</span>
+      <span class="tag">CLIP</span>
+      <span class="tag">TensorFlow</span>
+      <span class="tag">React</span>
+      <span class="tag">Docker</span>
+      <span class="tag">Azure</span>
+      <span class="tag">OpenCV</span>
+      <span class="tag">Scikit-learn</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">About</div>
+    <h2 class="section-title reveal">Engineer. Builder. Problem solver.</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+       <p>Hi, I'm Beulah.<br>
+
+          Most of my time is spent building projects,
+          learning new technologies, solving problems,
+          and occasionally breaking things while experimenting.</p>
+        <p>Currently deepening my foundations in <strong>computer science theory and applied AI</strong> at Maynooth University, while continuing to build real-world systems that solve actual problems.</p>
+        <div class="about-stats">
+          <div class="stat-card reveal reveal-delay-1">
+            <div class="stat-num">6+</div>
+            <div class="stat-label">Shipped projects</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-2">
+            <div class="stat-num">99%</div>
+            <div class="stat-label">ML accuracy achieved</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-3">
+            <div class="stat-num">8.33</div>
+            <div class="stat-label">CGPA / 10</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num">2×</div>
+            <div class="stat-label">Backend + AI projects</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right reveal reveal-delay-1">
+        <div class="edu-card">
+          <div class="edu-degree">MSc Computer Science (Applied)</div>
+          <div class="edu-school">Maynooth University</div>
+          <div class="edu-meta">
+            <span>Maynooth, Ireland</span>
+            <span>2025 – Present</span>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.Tech Computer Science Engineering</div>
+          <div class="edu-school">CMR College of Engineering &amp; Technology</div>
+          <div class="edu-meta">
+            <span>India</span>
+            <span>2021 – 2025 · 8.33/10</span>
+          </div>
+        </div>
+        <div class="now-card">
+          <div class="now-title">Currently</div>
+          <div class="now-item"><div class="now-dot"></div>Pursuing MSc at Maynooth University, Ireland</div>
+          <div class="now-item"><div class="now-dot"></div>Deepening expertise in distributed systems &amp; LLM pipelines</div>
+          <div class="now-item"><div class="now-dot"></div>Building AI-powered tools for real-world accessibility and automation</div>
+          <div class="now-item"><div class="now-dot"></div>Open to backend, AI engineering &amp; full-stack internship roles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">Selected work</h2>
+    <p class="section-sub reveal">End-to-end systems built with real engineering ownership — from architecture decisions to deployment.</p>
+    <div class="projects-grid">
+
+      <!-- SILENTNARRATOR - FEATURED -->
+      <div class="project-card featured reveal">
+        <div class="project-content">
+          <div class="project-header">
+            <div class="project-icon" style="background:rgba(124,110,245,.12);border:1px solid rgba(124,110,245,.2);color:var(--accent2)">🎵</div>
+            <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+              <div class="project-name">SilentNarrator</div>
+              <span class="project-badge">Full-Stack · AI</span>
+            </div>
+            <div class="project-desc">Multimodal accessibility platform that converts visual input into mood-based audio experiences using semantic image understanding. Built an asynchronous FastAPI backend with CLIP embeddings and real-time Spotify playlist retrieval.</div>
+          </div>
+          <div class="project-stack">
+            <span class="stack-pill">FastAPI</span>
+            <span class="stack-pill">CLIP (ViT-B/32)</span>
+            <span class="stack-pill">Hugging Face</span>
+            <span class="stack-pill">Streamlit</span>
+            <span class="stack-pill">Spotify API</span>
+            <span class="stack-pill">Python</span>
+          </div>
+          <div class="project-highlights">
+            <div class="highlight"><div class="highlight-dot"></div>Async inference pipeline: image ingestion → CLIP embeddings → probabilistic mood classification → Spotify delivery</div>
+            <div class="highlight"><div class="highlight-dot"></div>Modular backend architecture designed for extensibility and API-driven communication</div>
+            <div class="highlight"><div class="highlight-dot"></div>Structured feedback handling with end-to-end error recovery across the inference chain</div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/beulahsupragnya12" target="_blank" class="project-link">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              View code
+            </a>
+          </div>
+        </div>
+        <div class="project-visual" style="background:linear-gradient(135deg,rgba(124,110,245,.06),rgba(45,212,191,.04));border-left:1px solid var(--border)">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;padding:2rem;width:100%">
+            <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:900;letter-spacing:-0.05em;opacity:.12;color:var(--text)">🎵</div>
+            <div style="display:flex;flex-direction:column;gap:.75rem;width:100%;max-width:220px">
+              <div style="background:rgba(124,110,245,.1);border:1px solid rgba(124,110,245,.2);border-radius:8px;padding:.6rem 1rem;font-size:.72rem;font-family:var(--font-mono);color:var(--accent2)">
+                <div style="color:var(--text3);margin-bottom:.2rem">mood detected</div>
+                <div>melancholic · 0.87</div>
+              </div>
+              <div style="background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.2);border-radius:8px;padding:.6rem 1rem;font-size:.72rem;font-family:var(--font-mono);color:#5eead4">
+                <div style="color:var(--text3);margin-bottom:.2rem">spotify retrieved</div>
+                <div>12 tracks · 48min</div>
+              </div>
+              <div style="background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;font-size:.72rem;font-family:var(--font-mono);color:var(--text2)">
+                <div style="color:var(--text3);margin-bottom:.2rem">clip similarity</div>
+                <div>0.923 cosine</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMARTSORT -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:#6ee7b7">♻️</div>
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+            <div class="project-name">SmartSort</div>
+            <span class="project-badge">Full-Stack · Vision</span>
+          </div>
+          <div class="project-desc">AI-powered waste classification platform providing region-aware recycling guidance from uploaded images. Built with Google Vision API, location-aware disposal recommendations, and Docker-based microservice deployment.</div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-pill">Next.js</span>
+          <span class="stack-pill">TypeScript</span>
+          <span class="stack-pill">Node.js</span>
+          <span class="stack-pill">MongoDB Atlas</span>
+          <span class="stack-pill">Docker</span>
+          <span class="stack-pill">Google Vision</span>
+        </div>
+        <div class="project-highlights">
+          <div class="highlight"><div class="highlight-dot"></div>Multi-service Docker architecture with docker-compose for environment isolation</div>
+          <div class="highlight"><div class="highlight-dot"></div>Location-aware disposal via OpenCage Geocoder API integration</div>
+          <div class="highlight"><div class="highlight-dot"></div>Persistent scan history &amp; analytics via MongoDB Atlas</div>
+        </div>
+        <div class="project-footer">
+          <a href="https://github.com/beulahsupragnya12" target="_blank" class="project-link">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View code
+          </a>
+          <span class="project-badge">Docker · REST API</span>
+        </div>
+      </div>
+
+      <!-- CHILLBILL -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#93c5fd">💸</div>
+          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.5rem">
+            <div class="project-name">ChillBill</div>
+            <span class="project-badge microsoft-badge">Microsoft Mentorship</span>
+          </div>
+          <div class="project-desc">AI expense-sharing app built under guidance of Microsoft engineers. Intelligent receipt processing via Azure AI Document Intelligence with OCR-based structured data extraction and serverless backend architecture.</div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-pill">React</span>
+          <span class="stack-pill">Azure Functions</span>
+          <span class="stack-pill">Azure SQL</span>
+          <span class="stack-pill">Azure AI Doc Intelligence</span>
+          <span class="stack-pill">REST APIs</span>
+        </div>
+        <div class="project-highlights">
+          <div class="highlight"><div class="highlight-dot"></div>OCR-based receipt processing pipeline with structured data extraction</div>
+          <div class="highlight"><div class="highlight-dot"></div>Debt minimization workflows and SQL persistence with blob storage</div>
+          <div class="highlight"><div class="highlight-dot"></div>Mentored by 2 Microsoft engineers on scalable Azure architecture</div>
+        </div>
+        <div class="project-footer">
+          <a href="https://github.com/beulahsupragnya12" target="_blank" class="project-link">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View code
+          </a>
+          <span class="project-badge microsoft-badge">Azure Cloud</span>
+        </div>
+      </div>
+
+      <!-- MUTEROUTE -->
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:#fbbf24">🤟</div>
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+            <div class="project-name">MuteRoute</div>
+            <span class="project-badge">Computer Vision · CNN</span>
+          </div>
+          <div class="project-desc">Real-time American Sign Language recognition system using a custom CNN architecture. Built complete preprocessing pipeline with ROI extraction, adaptive thresholding, and two-stage classification for visually similar ASL symbols.</div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-pill">TensorFlow/Keras</span>
+          <span class="stack-pill">OpenCV</span>
+          <span class="stack-pill">CNN</span>
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">Webcam inference</span>
+        </div>
+        <div class="project-highlights">
+          <div class="highlight"><div class="highlight-dot"></div>Custom CNN with conv, max-pool, dropout, dense layers — Adam + cross-entropy</div>
+          <div class="highlight"><div class="highlight-dot"></div>Gaussian blur, adaptive thresholding, normalization preprocessing pipeline</div>
+          <div class="highlight"><div class="highlight-dot"></div>Two-stage classifier for disambiguation of visually similar symbols</div>
+        </div>
+        <div class="project-footer">
+          <a href="https://github.com/beulahsupragnya12" target="_blank" class="project-link">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View code
+          </a>
+          <span class="project-badge">Real-time inference</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">Skills</div>
+    <h2 class="section-title reveal">Technical toolkit</h2>
+    <p class="section-sub reveal">Depth in AI/ML systems and backend engineering, breadth across the full stack.</p>
+    <div class="skills-grid">
+
+      <div class="skill-cat reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(124,110,245,.1);border:1px solid rgba(124,110,245,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--accent2);stroke-width:2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <span class="skill-cat-name">Languages</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">Java</span><span class="skill-tag">C / C++</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--teal);stroke-width:2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span class="skill-cat-name">Backend &amp; APIs</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">FastAPI</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express</span><span class="skill-tag">Firebase</span><span class="skill-tag">Azure Functions</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal reveal-delay-2">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--accent3);stroke-width:2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <span class="skill-cat-name">AI / Machine Learning</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">CLIP</span><span class="skill-tag">CNNs</span><span class="skill-tag">Transformers</span><span class="skill-tag">TensorFlow/Keras</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Random Forest</span><span class="skill-tag">Feature Engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--amber);stroke-width:2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <span class="skill-cat-name">Computer Vision</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">OpenCV</span><span class="skill-tag">Image Pipelines</span><span class="skill-tag">OCR</span><span class="skill-tag">Semantic Embeddings</span><span class="skill-tag">Adaptive Thresholding</span><span class="skill-tag">ROI Extraction</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--blue);stroke-width:2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <span class="skill-cat-name">DevOps &amp; Cloud</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span><span class="skill-tag">docker-compose</span><span class="skill-tag">Azure Services</span><span class="skill-tag">Firebase Firestore</span><span class="skill-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal reveal-delay-2">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--green);stroke-width:2" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <span class="skill-cat-name">Databases</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">SQL</span><span class="skill-tag">MongoDB Atlas</span><span class="skill-tag">Firebase Firestore</span><span class="skill-tag">Azure SQL</span><span class="skill-tag">Database Design</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon" style="background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2)">
+            <svg style="width:16px;height:16px;fill:none;stroke:var(--red);stroke-width:2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <span class="skill-cat-name">Frontend</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span><span class="skill-tag">Next.js</span><span class="skill-tag">Streamlit</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Android SDK</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">Experience</div>
+    <h2 class="section-title reveal">Background</h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-date">
+          <span class="exp-date-range">2025 – Present</span>
+          <span class="exp-status"><span style="width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block"></span> Current</span>
+        </div>
+        <div>
+          <div class="exp-content-title">MSc Computer Science (Applied)</div>
+          <div class="exp-content-sub">Maynooth University · Maynooth, Ireland</div>
+          <div class="exp-content-body">Postgraduate research and coursework in applied computer science, deepening expertise in algorithms, systems design, and AI engineering. Actively building research-grade software projects while in the program.</div>
+          <div class="exp-tags">
+            <span class="skill-tag">Algorithms</span><span class="skill-tag">AI Systems</span><span class="skill-tag">Research</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal reveal-delay-1">
+        <div class="exp-date">
+          <span class="exp-date-range">2024</span>
+        </div>
+        <div>
+          <div class="exp-content-title">Microsoft Mentorship Collaboration</div>
+          <div class="exp-content-sub">ChillBill · Azure AI Engineering Project</div>
+          <div class="exp-content-body">Selected for a mentor-guided engineering team supported by two Microsoft engineers. Contributed to the ChillBill AI expense-sharing application — received technical guidance on backend architecture, Azure AI integration, and scalable application workflows. Participated in architecture reviews, UML design, system testing, and scalable service-oriented documentation.</div>
+          <div class="exp-tags">
+            <span class="skill-tag">Azure</span><span class="skill-tag">OCR Pipelines</span><span class="skill-tag">System Architecture</span><span class="skill-tag">Mentored Engineering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-date">
+          <span class="exp-date-range">2021 – 2025</span>
+        </div>
+        <div>
+          <div class="exp-content-title">B.Tech Computer Science Engineering</div>
+          <div class="exp-content-sub">CMR College of Engineering &amp; Technology · India · CGPA: 8.33/10</div>
+          <div class="exp-content-body">Four-year undergraduate programme covering algorithms, data structures, machine learning, computer vision, database systems, operating systems, and linear algebra. Graduated with distinction while delivering multiple production-ready AI and full-stack projects.</div>
+          <div class="exp-tags">
+            <span class="skill-tag">ML</span><span class="skill-tag">Data Structures</span><span class="skill-tag">Computer Vision</span><span class="skill-tag">Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-date">
+          <span class="exp-date-range">Key achievements</span>
+        </div>
+        <div>
+          <div class="exp-content-title">Engineering Highlights</div>
+          <div class="exp-content-sub">Across all projects</div>
+          <div class="exp-content-body">Achieved <strong style="color:var(--text)">99.32% test accuracy</strong> on Thyroid Disease Classification using Random Forest with RFE + PCA + Chi-Square feature selection over 22,633 patient records. Built emergency response Android app with real-time GPS location sharing and automated SMS dispatch. Delivered 6+ end-to-end AI and backend systems spanning accessibility, healthcare, sustainability, and finance domains.</div>
+          <div class="exp-tags">
+            <span class="skill-tag">99.32% ML Accuracy</span><span class="skill-tag">6+ Shipped Projects</span><span class="skill-tag">AI + Backend Focus</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+GITHUB
+<section id="github">
+  <div class="container">
+    <div class="section-label reveal">Open Source</div>
+    <h2 class="section-title reveal">GitHub activity</h2>
+    <p class="section-sub reveal">Building consistently — shipped projects across AI, backend, CV, and full-stack domains.</p>
+    <div class="github-grid reveal">
+      <div class="gh-stat">
+        <div class="gh-num">6+</div>
+        <div class="gh-label">Repositories</div>
+      </div>
+      <div class="gh-stat">
+        <div class="gh-num">5</div>
+        <div class="gh-label">Languages used</div>
+      </div>
+      <div class="gh-stat">
+        <div class="gh-num">4</div>
+        <div class="gh-label">AI/ML projects</div>
+      </div>
+    </div>
+    <div class="gh-repos reveal reveal-delay-1">
+      <a href="https://github.com/beulahsupragnya12" target="_blank" class="repo-card">
+        <div class="repo-name">SilentNarrator</div>
+        <div class="repo-desc">Multimodal visual-to-audio accessibility platform using CLIP + Spotify API</div>
+        <div class="repo-meta">
+          <span class="repo-lang lang-python">Python</span>
+          <span>FastAPI · CLIP</span>
+        </div>
+      </a>
+      <a href="https://github.com/beulahsupragnya12" target="_blank" class="repo-card">
+        <div class="repo-name">SmartSort</div>
+        <div class="repo-desc">AI waste classification with Docker microservices and location-aware guidance</div>
+        <div class="repo-meta">
+          <span class="repo-lang lang-ts">TypeScript</span>
+          <span>Next.js · Docker</span>
+        </div>
+      </a>
+      <a href="https://github.com/beulahsupragnya12" target="_blank" class="repo-card">
+        <div class="repo-name">MuteRoute</div>
+        <div class="repo-desc">Real-time ASL recognition system with custom CNN and OpenCV pipeline</div>
+        <div class="repo-meta">
+          <span class="repo-lang lang-python">Python</span>
+          <span>TensorFlow · OpenCV</span>
+        </div>
+      </a>
+      <a href="https://github.com/beulahsupragnya12" target="_blank" class="repo-card">
+        <div class="repo-name">Thyroid Classifier</div>
+        <div class="repo-desc">ML pipeline achieving 99.32% accuracy over 22k patient records</div>
+        <div class="repo-meta">
+          <span class="repo-lang lang-python">Python</span>
+          <span>Scikit-learn · RFE</span>
+        </div>
+      </a>
+    </div>
+    <div class="contribution-chart reveal reveal-delay-2">
+      <div class="contrib-label">Contribution activity (past year)</div>
+      <div class="contrib-grid" id="contribGrid"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">Contact</div>
+    <div class="contact-grid">
+      <div class="contact-copy reveal">
+        <div class="big-cta">Let's build something <span>impactful.</span></div>
+        <p>I'm actively looking for software engineering roles focused on AI systems, backend infrastructure, or full-stack development. If you're working on something ambitious, I'd love to hear about it.</p>
+        <div class="contact-links">
+          <a href="mailto:beulahsupragnya12@gmail.com" class="contact-link">
+            <div class="contact-link-icon" style="background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.15)">
+              <svg style="width:15px;height:15px;fill:none;stroke:var(--red);stroke-width:2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div style="font-size:.8rem;color:var(--text3);margin-bottom:.1rem;font-family:var(--font-mono)">Email</div>
+              <div style="font-size:.875rem;color:var(--text)">beulahsupragnya12@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/beulahsupragnyapamula" target="_blank" class="contact-link">
+            <div class="contact-link-icon" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15)">
+              <svg style="width:15px;height:15px;fill:none;stroke:var(--blue);stroke-width:2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div style="font-size:.8rem;color:var(--text3);margin-bottom:.1rem;font-family:var(--font-mono)">LinkedIn</div>
+              <div style="font-size:.875rem;color:var(--text)">linkedin.com/in/beulahsupragnyapamula</div>
+            </div>
+          </a>
+          <a href="https://github.com/beulahsupragnya12" target="_blank" class="contact-link">
+            <div class="contact-link-icon" style="background:rgba(124,110,245,.08);border:1px solid rgba(124,110,245,.15)">
+              <svg style="width:15px;height:15px;fill:none;stroke:var(--accent2);stroke-width:2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div>
+              <div style="font-size:.8rem;color:var(--text3);margin-bottom:.1rem;font-family:var(--font-mono)">GitHub</div>
+              <div style="font-size:.875rem;color:var(--text)">github.com/beulahsupragnya12</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-1">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="What's this about?">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about the role, project, or opportunity..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleFormSubmit(this)">Send message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">
+      Built with care · <a href="mailto:beulahsupragnya12@gmail.com">Beulah Supragnya Pamula</a> · 2025
+    </div>
+    <div class="footer-links">
+      <a href="#hero">Back to top ↑</a>
+      <!-- <a href="https://github.com/beulahsupragnya12" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/beulahsupragnyapamula" target="_blank">LinkedIn</a> -->
+    </div>
+  </div>
+</footer>
+
+<script>
+// MOUSE GLOW
+const glow = document.getElementById('mouseGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// NAV SCROLL
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// MOBILE NAV
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// REVEAL ON SCROLL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// CONTRIBUTION GRID
+const grid = document.getElementById('contribGrid');
+const levels = [0,0,0,1,0,2,0,0,1,3,2,0,0,1,0,2,3,4,2,1,0,0,3,4,3,2,1,0,0,2,3,2,1,0,1,2,3,4,3,2,1,0,0,1,2,3,4,3,2,0,0,2,1,0,1,2,0,0,3,4,3,2,1,0,2,3,4,3,2,1,0,0,1,2,3,2,1,0,0,2,3,4,3,2,1,0,1,2,0,0,3,4,3,2,1,0,0,2,3,2,1,2,3,4,3,2,1,0,0,0,1,2,3,4,3,2,1,0,2,3,4,3,2,1,0,0,1,2,3,2,1,0,0,2,3,4,3,2,1,0,1,2,0,0,1,2,3,4,3,2,1,0,0,2,3,2,1,0,0,1,2,3,0,1,2,3,4,3,2,0,0,1,0,2,3,4,2,1,0,0,3,4,3,2,1,0,0,2,3,2,1,0,1,2,3,4,3,2,1,0,0,1,2,3,4,3,2,0,0,2,1,0,1,2,3,0,0,3,4,3,2,1,0,2,3,4,3,2,1,0,0,1,2,3,2,1,0,0,2,3,4,3,2,1,0,1,2,0,0,3,4,3,2,1,0,0,2,3,2,1,2,3,4,3,2,1,0,0,0,1,2,3,4,3,2,1,0,2,3,4,3,2,1,0,0,1,2,3,2,1,0,0,2,3,4,3,2,1,0,1,2,0,0,1,2,3,4,3,2,1,0,0,2,3,2,1,0,0,1,2,3,4,0,1,2,3,4,3,2,0,0,1,0,2,3,4,2,1,0,0,3,4,3,2,1,0,0,2,3,2,1,0,1,2,3,4,3,2,1,0,0,1,2,3,2];
+for(let i=0;i<364;i++){
+  const d=document.createElement('div');
+  const l=levels[i%levels.length]||0;
+  d.className='contrib-day'+(l?' l'+l:'');
+  grid.appendChild(d);
+}
+
+// FORM SUBMIT
+function handleFormSubmit(btn) {
+  btn.textContent = 'Message sent ✓';
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Send message →';
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 3000);
+}
+
+// HERO REVEAL ON LOAD
+window.addEventListener('load', () => {
+  document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 100 + i * 120);
+  });
+});
+</script>
+</body>
+</html>
